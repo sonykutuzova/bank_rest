@@ -6,58 +6,56 @@
 #  - Указать порт приложения.
 #  - Настроить параметры безопасности и JWT.
 #  - Включить Swagger UI.
-
 server:
   port: 8080
   servlet:
-    context-path: /
+    context-path: /api
 
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          secret-key: your-secret-key-here
   application:
     name: bank
 
-  datasourse:
-    url: jdbc:postgresql://localhost:5432/bank_system
-    username: postgres
-    password: password
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:postgres}:5432/bank_cards_db
+    username: ${POSTGRES_USERNAME:postgres}
+    password: ${POSTGRES_PASSWORD:password}
     driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         show_sql: true
         format_sql: true
+    open-in-view: false
 
-    liquibase:
-      change-log: classpath:db/changelog/db.changelog-master.yaml
-      enabled: true
-
-    security:
-      oauth2:
-        resourceserver:
-          jwt:
-            secret-key: ${JWT_SECRET:my-super-secure-jwt-secret-key-minimum-256-bits}
-
-  jwt:
-    secret: ${JWT_SECRET:my-super-secure-jwt-secret-key-minimum-256-bits}
-    expiration: 86400000 # 24 hours in milliseconds
-
-  springdoc:
-    api-docs:
-      path: /v3/api-docs
-    swagger-ui:
-      path: /swagger-ui.html
-      enabled: true
-    show-actuator: true
-
-  logging:
-    level:
-      com.bank: DEBUG
-      org.springframework.security: DEBUG
-      org.hibernate.SQL: DEBUG
+  liquibase:
+    change-log: classpath:db/migration/db.changelog-master.yaml
+    enabled: true
 
 
+# JWT Configuration
+jwt:
+  secret:  ${JWT_SECRET:my-super-secure-jwt-secret-key-minimum-256-bits-here-123456}
+  expiration: 86400000
 
+# Swagger/OpenAPI Configuration
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+
+# Logging
+logging:
+  level:
+    com.bank: DEBUG
+    org.springframework.security: DEBUG

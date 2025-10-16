@@ -6,17 +6,44 @@ databaseChangeLog:
         - createTable:
             tableName: users
             columns:
-              - column: {name: id, type: BIGSERIAL, constraints: {primaryKey: true}}
-              - column: {name: username, type: VARCHAR(50), constraints: {unique: true, nullable: false}}
-              - column: {name: password, type: VARCHAR(255), constraints: {nullable: false}}
-              - column: {name: email, type: VARCHAR(100)}
-              - column: {name: role, type: VARCHAR(20), defaultValue: "USER", constraints: {nullable: false}}
-
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: username
+                  type: VARCHAR(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(100)
+              - column:
+                  name: role
+                  type: VARCHAR(20)
+                  defaultValue: "USER"
+                  constraints:
+                    nullable: false
 
         - insert:
             tableName: users
             columns:
-              - column: {name: username, value: "admin_sonya"}
-              - column: {name: password, value: "$2a$10$MySecretEncryptedPasswordHere"}
-              - column: {name: email, value: "my@bank.com"}
-              - column: {name: role, value: "ADMIN"}
+              - column:
+                  name: username
+                  value: "admin_sonya"
+              - column:
+                  name: password
+                  value: "$2a$10$MySecretEncryptedPasswordHere"
+              - column:
+                  name: email
+                  value: "my@bank.com"
+              - column:
+                  name: role
+                  value: "ADMIN"
