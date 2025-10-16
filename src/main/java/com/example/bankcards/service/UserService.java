@@ -19,12 +19,13 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserDTO createUser(String email, String password, String firstName, String lastName, String phoneNumber) {
+    public UserDTO createUser(String email, String password, String username, String phoneNumber) {
         if (userRepository.existsByEmail(email)) {
             throw new RuntimeException("User with email " + email + " already exists");
         }
 
         User user = User.builder()
+                .username(username)
                 .email(email)
                 .password(passwordEncoder.encode(password))
                 .phoneNumber(phoneNumber)

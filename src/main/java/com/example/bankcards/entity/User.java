@@ -86,6 +86,9 @@ public class User {
     private Long id;
 
     @Column(unique = true, nullable = false)
+    private String username;  // ← ДОЛЖНО БЫТЬ
+
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Column(nullable = false)

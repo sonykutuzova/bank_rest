@@ -26,8 +26,7 @@ public class UserController {
         UserDTO user = userService.createUser(
                 request.getEmail(),
                 request.getPassword(),
-                request.getFirstName(),
-                request.getLastName(),
+                request.getUsername(),
                 request.getPhoneNumber()
         );
         return ResponseEntity.ok(user);

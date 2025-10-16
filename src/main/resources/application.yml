@@ -10,7 +10,10 @@ server:
   port: 8080
   servlet:
     context-path: /api
-
+app:
+  jwt:
+    secret: "mySuperSecretKeyForJWTInBankCardSystem2024ThatIsVeryLongAndSecure"
+    expiration: 86400000
 spring:
   security:
     oauth2:

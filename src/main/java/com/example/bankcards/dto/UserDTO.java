@@ -15,8 +15,7 @@ import java.time.LocalDateTime;
 public class UserDTO {
     private Long id;
     private String email;
-    private String firstName;
-    private String lastName;
+    private String username;
     private String phoneNumber;
     private User.UserRole role;
     private LocalDateTime createdAt;
@@ -27,7 +26,9 @@ public class UserDTO {
         }
 
         return UserDTO.builder()
+
                 .id(user.getId())
+                .username(user.getUsername())
                 .email(user.getEmail())
                 .phoneNumber(user.getPhoneNumber())
                 .role(user.getRole())
